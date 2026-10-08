@@ -1,0 +1,24 @@
+[
+  {
+    "task_name": "shallow-water-wetdry",
+    "prompt_clarity": 5,
+    "is_agentic": "yes",
+    "prompt_quality_rationale": "The prompt states the exact PDE system, the required function signature/argument conventions, and the full grading thresholds (section 'What is verified' matches the rubric nearly verbatim), leaving no ambiguity about what 'correct' means. Completing it requires open-ended exploration of the buggy /app/swe package, designing a well-balanced/positivity-preserving/second-order scheme, and iteratively testing against /app/examples and the described cases, which is clearly agentic.",
+    "problematic_rubrics": "[]",
+    "rubric_quality_rationale": "All five rubric criteria were cross-checked word-for-word against grade.py's check()/WEIGHTS/GROUPS and cases.py's case builders: grid sizes (200, 80x80, 400, 100/200/400/800/1600, 400, 100x100, 256x256), times (t=2, t=0.1, t=0.06, quarter/half/full Thacker period), and every numeric tolerance (1e-11, 2.5e-3/6e-3, 2e-3/4.5e-3/1e-12, order>=1.8 & 1e-12 mass, 6e-4/1e-3, 5e-3/9e-3/1e-10, 120s/1e-3/1e-12) match exactly, and weights (20/20/20/25/15=100) match WEIGHTS. All criteria describe desired (positive) behavior with positive weights, so no sign errors. One very minor looseness: rubric 1's shared clause 'outputs up to t = 2' literally only holds for the 1D lake case (times [0.5, 2.0]); the 2D lake case only runs to t=1.0 (times [0.3, 1.0]). This does not change what is graded and is not a substantive conflict, so it is not listed as a defect.",
+    "problematic_tests": "[]",
+    "test_quality_rationale": "Verified the embedded analytic references by hand: the Stoker (wet) and Ritter (dry) dam-break formulas in cases.py match the standard shallow-water Riemann exact solutions (rarefaction/shock structure, bisection for h*), and I algebraically re-derived Thacker's planar-oscillation solution (mass + momentum balance) and confirmed cases.py's s(t) = -B*w*cos(wt)/g and c(t) = B^2*sin^2(wt)/(2g) are exactly the closed-form coefficients required, with w = sqrt(2*g*h0)/a consistent throughout. The axis='y' dam-break variant in dam_break() correctly swaps hu/hv roles when transposing the problem. No tautological, wrong-endpoint, or incorrect-formula defects found. I also ran the actual (buggy) environment/app/swe/solver.py to confirm the three complaints are real: still-lake test gave max|hu|~0.029 and max depth change ~0.009 (both should be <=1e-11); a Thacker moving-shoreline run produced min depth ~ -4.5e-12 (negative); a self-convergence check on the periodic smooth-flow case gave observed order ~0.93-0.97 (should be >=1.8, confirming first-order accuracy). All three complaints are accurate.",
+    "criteria_completeness": 4,
+    "uncovered_requirements": "non-square/rectangular 2D grids with nx != ny or dx != dy are never exercised (all 2D cases use square grids with dx=dy); periodic and open boundary conditions are only exercised in 1D, never in a genuine 2D configuration",
+    "has_redundancies": "no",
+    "score_distribution_reasonable": "yes",
+    "coverage_and_balance_rationale": "The five groups cover distinct, important properties (lake-at-rest well-balancing, shock/rarefaction + positivity at dam breaks, formal order of accuracy, wetting/drying with mass/symmetry invariants, and speed-at-scale with accuracy); none duplicate each other's core assertion. Weights (20/20/20/25/15) sum to 100 and match the rubric, and reward requires all five groups to pass, consistent with the prompt's 'full credit requires all five.'",
+    "is_self_contained": "yes",
+    "input_adequacy": 5,
+    "environment_adequacy": 5,
+    "missing_data": "",
+    "missing_tools": "",
+    "task_adequacy_rationale": "environment/Dockerfile sets PYTHONPATH=/app and copies app/ (swe/ package plus examples/) into /app, so 'import swe' from /app works as required; requirements.txt provides numpy/scipy/matplotlib/pytest, sufficient for implementing and testing a vectorized well-balanced/positivity-preserving 2nd-order finite-volume scheme. /app/examples/still_lake.py and dam_break.py are runnable, representative reproductions of complaints 1 and 2 using only data available to the agent. A quick feasibility check (CFL estimate for the 256x256 Thacker scale case) suggests the 120s budget is comfortably achievable for a reasonably optimized vectorized numpy solver, so the scale requirement is not an unreasonable bar.",
+    "error": ""
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "number": 1,
+    "points": 20,
+    "key": "energy",
+    "criterion": "Energy: All structures: |E − E_ref| ≤ 1e-7 eV. [Common conditions: Each check runs in a fresh process as an unprivileged user, single-threaded, using `/app/potentials/Si.sw`, `Si_mod.sw` and `SiGe.sw`. References come from an independent brute-force evaluation of the energy in `CONTRACT.md` with explicitly enumerated periodic images; derivatives are taken by complex-step and high-order finite differences of that energy, not from any analytic formula.  Test structures include: perturbed diamond and zincblende cells; two-atom primitive cells and a one-atom cell whose lattice vectors are shorter than the cutoff (so atoms interact with several images of the same atom, including their own); skewed triclinic cells with random atom positions, some given outside the cell; a slab periodic in two directions; an isolated cluster; and Si–Ge structures with distinct parameters for every element triple. A calculator instance is reused across structures.]"
+  },
+  {
+    "number": 2,
+    "points": 20,
+    "key": "forces",
+    "criterion": "Forces: All structures: every component within 1e-6 eV/Å. [Common conditions: Each check runs in a fresh process as an unprivileged user, single-threaded, using `/app/potentials/Si.sw`, `Si_mod.sw` and `SiGe.sw`. References come from an independent brute-force evaluation of the energy in `CONTRACT.md` with explicitly enumerated periodic images; derivatives are taken by complex-step and high-order finite differences of that energy, not from any analytic formula.  Test structures include: perturbed diamond and zincblende cells; two-atom primitive cells and a one-atom cell whose lattice vectors are shorter than the cutoff (so atoms interact with several images of the same atom, including their own); skewed triclinic cells with random atom positions, some given outside the cell; a slab periodic in two directions; an isolated cluster; and Si–Ge structures with distinct parameters for every element triple. A calculator instance is reused across structures.]"
+  },
+  {
+    "number": 3,
+    "points": 20,
+    "key": "stress",
+    "criterion": "Stress: All fully periodic structures: every Voigt component within 1e-8 eV/Å³. [Common conditions: Each check runs in a fresh process as an unprivileged user, single-threaded, using `/app/potentials/Si.sw`, `Si_mod.sw` and `SiGe.sw`. References come from an independent brute-force evaluation of the energy in `CONTRACT.md` with explicitly enumerated periodic images; derivatives are taken by complex-step and high-order finite differences of that energy, not from any analytic formula.  Test structures include: perturbed diamond and zincblende cells; two-atom primitive cells and a one-atom cell whose lattice vectors are shorter than the cutoff (so atoms interact with several images of the same atom, including their own); skewed triclinic cells with random atom positions, some given outside the cell; a slab periodic in two directions; an isolated cluster; and Si–Ge structures with distinct parameters for every element triple. A calculator instance is reused across structures.]"
+  },
+  {
+    "number": 4,
+    "points": 25,
+    "key": "hessian",
+    "criterion": "Hessian: All structures up to 16 atoms (including the slab, cluster and one-atom cell): shape (3N, 3N), every entry within 1e-5 eV/Å². [Common conditions: Each check runs in a fresh process as an unprivileged user, single-threaded, using `/app/potentials/Si.sw`, `Si_mod.sw` and `SiGe.sw`. References come from an independent brute-force evaluation of the energy in `CONTRACT.md` with explicitly enumerated periodic images; derivatives are taken by complex-step and high-order finite differences of that energy, not from any analytic formula.  Test structures include: perturbed diamond and zincblende cells; two-atom primitive cells and a one-atom cell whose lattice vectors are shorter than the cutoff (so atoms interact with several images of the same atom, including their own); skewed triclinic cells with random atom positions, some given outside the cell; a slab periodic in two directions; an isolated cluster; and Si–Ge structures with distinct parameters for every element triple. A calculator instance is reused across structures.]"
+  },
+  {
+    "number": 5,
+    "points": 15,
+    "key": "scale_dynamics",
+    "criterion": "Scale and dynamics: (a) A 64-atom Si–Ge triclinic cell repeated 5×5×5 (8000 atoms): energy, forces and stress together within 60 s of wall time; energy within 1e-5 eV of 125× the reference for the 64-atom cell, forces within 1e-6 eV/Å and stress within 1e-8 eV/Å³ of the 64-atom reference values. (b) 300 velocity-Verlet steps of 1 fs for 64 silicon atoms starting near 1200 K, wrapping atoms into the cell every step: total energy stays within 5e-4 eV/atom of its initial value and total momentum stays below 1e-9 amu·Å/fs. [Common conditions: Each check runs in a fresh process as an unprivileged user, single-threaded, using `/app/potentials/Si.sw`, `Si_mod.sw` and `SiGe.sw`. References come from an independent brute-force evaluation of the energy in `CONTRACT.md` with explicitly enumerated periodic images; derivatives are taken by complex-step and high-order finite differences of that energy, not from any analytic formula.  Test structures include: perturbed diamond and zincblende cells; two-atom primitive cells and a one-atom cell whose lattice vectors are shorter than the cutoff (so atoms interact with several images of the same atom, including their own); skewed triclinic cells with random atom positions, some given outside the cell; a slab periodic in two directions; an isolated cluster; and Si–Ge structures with distinct parameters for every element triple. A calculator instance is reused across structures.]"
+  }
+]
