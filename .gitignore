@@ -1,0 +1,21 @@
+# Secrets
+.env
+.env.*
+*.key
+
+# Harbor run output (large; logs can contain environment details)
+jobs/
+**/jobs/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Local artefacts
+*.zip
+.DS_Store
+.idea/
+.vscode/

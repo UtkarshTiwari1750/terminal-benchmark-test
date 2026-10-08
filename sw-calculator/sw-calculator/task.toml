@@ -1,0 +1,43 @@
+schema_version = "1.4"
+artifacts = []
+
+[task]
+name = "tera/stillinger-weber-ase"
+version = "1.0.0"
+description = "Turn a broken Stillinger-Weber ASE calculator into a correct multi-species implementation with analytic forces, stress and Hessian for arbitrary periodic cells."
+authors = [{ name = "Tera", email = "ujjwaltiwari232@gmail.com" }]
+keywords = ["scientific-computing", "molecular-dynamics", "interatomic-potentials", "ase", "materials"]
+
+[metadata]
+category = "scientific-computing"
+difficulty = "hard"
+expert_time_estimate_min = 300
+junior_time_estimate_min = 900
+
+[verifier]
+timeout_sec = 2400.0
+network_mode = "no-network"
+collect = []
+
+[verifier.env]
+
+[agent]
+timeout_sec = 14400.0
+# The agent may reach only the model API; no package downloads or external answers.
+network_mode = "allowlist"
+allowed_hosts = ["api.anthropic.com"]
+
+[environment]
+# Public only while the container starts and the agent CLI is installed;
+# the [agent] and [verifier] sections override it for those phases.
+network_mode = "public"
+build_timeout_sec = 900.0
+os = "linux"
+cpus = 2
+memory_mb = 4096
+storage_mb = 4096
+mcp_servers = []
+
+[environment.env]
+
+[solution.env]
